@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Container, Section } from "@/components/Container";
-import { getPost, getRelated } from "@/lib/blog";
+import { getPost, getRelated, type BlogPost } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { post: BlogPost; related: BlogPost[] } => {
     const post = getPost(params.slug);
     if (!post) throw notFound();
     return { post, related: getRelated(params.slug) };
