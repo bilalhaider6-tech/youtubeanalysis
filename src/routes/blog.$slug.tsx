@@ -53,7 +53,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function PostPage() {
-  const { post, related } = Route.useLoaderData();
+  const { post, related } = Route.useLoaderData() as { post: BlogPost; related: BlogPost[] };
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const share = (where: "twitter" | "linkedin" | "copy") => {
     if (where === "copy") { navigator.clipboard.writeText(shareUrl).then(() => toast.success("Link copied")); return; }
